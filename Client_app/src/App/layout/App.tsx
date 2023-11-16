@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import { Header } from 'semantic-ui-react'
+import { Activity } from '../models/activity'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [activities, setActivities] = useState([])
+  useEffect(()=>{
+    axios.get<Activity[]>('http://localhost:5000/api/activities')
+  })
   return (
     <>
       <div>
@@ -17,6 +22,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <Header as='h1' icon='user'/>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
